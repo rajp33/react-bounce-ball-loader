@@ -1,12 +1,15 @@
 import typescript from "@rollup/plugin-typescript";
 import dts from "rollup-plugin-dts";
 import svgr from '@svgr/rollup';
+import resolve from '@rollup/plugin-node-resolve';
+import commonjs from "@rollup/plugin-commonjs";
 
-const packageJson = require("./package.json");
+import packageJson from "./package.json" assert { type: "json" };
 
 export default [
   {
     input: "src/index.ts",
+    external: ['react-dom', 'styled-components'],
     output: [
       {
         file: packageJson.main,
@@ -22,8 +25,8 @@ export default [
     plugins: [
       resolve(),
       commonjs(),
+      svgr({ typescript: true }),
       typescript({ tsconfig: "./tsconfig.json" }),
-      svgr()
     ],
   },
   {
