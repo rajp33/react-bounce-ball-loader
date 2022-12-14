@@ -1,0 +1,1 @@
+export { BounceBallProps, BounceBall } from './BounceBall';
